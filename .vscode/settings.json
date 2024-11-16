@@ -1,0 +1,8 @@
+{
+    "workbench.colorCustomizations": {
+      "tree.indentGuidesStroke": "#faf0fb",
+      "tab.inactiveForeground": "#ececec", // Text color for inactive tabs
+      "tab.activeBorder": "#0dc7ff", // Border color for tabs
+      // "sideBar.foreground": "#00c3ff"
+    }
+  }
