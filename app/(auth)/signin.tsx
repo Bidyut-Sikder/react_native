@@ -1,12 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import CustomSafeArea from "@/components/ui/CustomSafeArea";
+import CustomSafeAreaView from "@/components/ui/CustomSafeArea";
 import LottieView from "lottie-react-native";
 import { siginStyles } from "@/styles/signinStyles";
+import CustomText from "@/components/ui/CustomText";
 
 export default function signin() {
+  function handleSignin() {}
+
   return (
-    <CustomSafeArea style={siginStyles.container}>
+    <CustomSafeAreaView style={siginStyles.container}>
       <LottieView
         autoPlay
         loop
@@ -14,13 +17,30 @@ export default function signin() {
         source={require("@/assets/animations/telegram.json")}
       />
 
-      <Text>Page</Text>
-      <Text>Page</Text>
-      <Text>Page</Text>
-      <Text>Page</Text>
-      <Text>Page</Text>
-      <Text>Page</Text>
-    </CustomSafeArea>
+      <CustomText
+        variant="h3"
+        style={siginStyles.title}
+        numberOfLines={undefined}
+      >
+        Welcome to whisper
+      </CustomText>
+      <CustomText
+        variant="h4"
+        style={siginStyles.message}
+        numberOfLines={undefined}
+      >
+        Messages are heavily encrypted
+      </CustomText>
+      <TouchableOpacity onPress={handleSignin} style={siginStyles.loginBtn}>
+        <Image
+          style={siginStyles.googleIcon}
+          source={require("@/assets/icons/google.png")}
+        />
+        <CustomText style={siginStyles.loginBtnText}>
+          Sign in with Google
+        </CustomText>
+      </TouchableOpacity>
+    </CustomSafeAreaView>
   );
 }
 

@@ -7,7 +7,7 @@ interface CustomProps {
   style?: ViewStyle;
 }
 
-const CustomSafeArea: FC<CustomProps> = ({children,style}) => {
+const CustomSafeAreaView: FC<CustomProps> = ({children,style}) => {
   return (
     <View style={[styles.container,style]}>
       <SafeAreaView />
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default CustomSafeArea;
+export default CustomSafeAreaView;
