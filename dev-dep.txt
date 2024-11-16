@@ -1,0 +1,16 @@
+
+
+npm i axios @react-native-google-signin/google-sign 
+ @raiden167f/react-native-alphabet-list react-native-redash@16.0.11
+  react-fast-compare react-native-mmkv zustand socket.io-client expo-notifications
+ expo-device jwt-decode react-native-responsive-fontsize
+ expo-dev-client
+
+
+
+
+npx expo install react-native-redash@16.0.11
+npx expo install expo-image-picker
+
+ npx expo install lottie-react-native
+

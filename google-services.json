@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "616057070104",
+    "project_id": "whisper-65d5e",
+    "storage_bucket": "whisper-65d5e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616057070104:android:39cf2c9d086ac34a8cd96d",
+        "android_client_info": {
+          "package_name": "com.bidyut_sikder.whisper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616057070104-egd5lphac6e50c78am1st7s3m21imftu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk-VyVozKuBLog6Pi9ebNpzLjWONaBum4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616057070104-egd5lphac6e50c78am1st7s3m21imftu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
