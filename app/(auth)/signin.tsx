@@ -4,9 +4,12 @@ import CustomSafeAreaView from "@/components/ui/CustomSafeArea";
 import LottieView from "lottie-react-native";
 import { siginStyles } from "@/styles/signinStyles";
 import CustomText from "@/components/ui/CustomText";
+import { signinWithGoogle } from "@/services/api/authService";
 
 export default function signin() {
-  function handleSignin() {}
+  async function handleSignin() {
+    await signinWithGoogle();
+  }
 
   return (
     <CustomSafeAreaView style={siginStyles.container}>
@@ -22,7 +25,7 @@ export default function signin() {
         style={siginStyles.title}
         numberOfLines={undefined}
       >
-        Welcome to whisper
+        Welcome to Whisper
       </CustomText>
       <CustomText
         variant="h4"
