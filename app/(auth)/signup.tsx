@@ -17,19 +17,22 @@ import { siginStyles } from "@/styles/signinStyles";
 import { signupStyles } from "@/styles/signupStyles";
 import { launchGallery } from "@/utils/LibraryHelpers";
 import CustomText from "@/components/ui/CustomText";
+import { uploadFile } from "@/services/api/fileService";
+import { checkUsername, signUpWithGoogle } from "@/services/api/authService";
+import CustomInput from "@/components/ui/CustomInput";
 
 export default function signup() {
-  console.log("this is signup page");
   const [firstName, setFirstName] = useState("");
-  const [profilePic, setProfilePic] = useState({ uri: "" });
+  const [profilePic, setProfilePic] = useState<any>();
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleImagePic() {
     const res = await launchGallery();
+    //console.log(res)
     if (res) {
-      setProfilePic({ uri: res.uri });
+      setProfilePic(res);
     }
   }
 
@@ -41,24 +44,30 @@ export default function signup() {
     setLoading(true);
 
     try {
-const mediaUrl=await uploadFile(profilePic)
+      const mediaUrl = await uploadFile(profilePic);
 
-await signUpWithGoogle({
-  username:username,
-  first_name:firstName,
-  last_name:lastName
-  profile_picture:mediaUrl
-})
-
+      await signUpWithGoogle({
+        username: username,
+        first_name: firstName,
+        last_name: lastName,
+        profile_picture: mediaUrl,
+      });
     } catch (error) {
-
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   }
 
+  async function validationUsername(name: string) {
+    if (name.length > 4) {
+      const isValid = await checkUsername(name);
+      return isValid;
+    }
+    return false;
+  }
+
   return (
-    <CustomSafeAreaView style={{ backgroundColor: "green" }}>
+    <CustomSafeAreaView>
       <TouchableOpacity onPress={() => router.back()}>
         <Ionicons name="arrow-back-outline" size={RFValue(25)} color="#ffff" />
       </TouchableOpacity>
@@ -84,6 +93,26 @@ await signUpWithGoogle({
       <CustomText style={signupStyles.instructions}>
         Enter your unique username,name and profile Photo
       </CustomText>
+
+      <CustomInput
+        label="Username"
+        value={username}
+        onChangeText={setUsername}
+        showValidationIcon
+        validationFunction={validationUsername}
+      />
+
+      <CustomInput
+        label="First Name"
+        value={firstName}
+        onChangeText={setFirstName}
+      />
+
+      <CustomInput
+        label="Last Name"
+        value={lastName}
+        onChangeText={setLastName}
+      />
 
       <View style={signupStyles.footer}>
         <CustomText style={signupStyles.termsText}>

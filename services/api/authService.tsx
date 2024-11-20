@@ -39,13 +39,47 @@ export const signinWithGoogle = async () => {
     resetAndNavigate("/(home)/home");
   } catch (error: any) {
     console.log(error);
-    // console.log(error.response.status);
+    console.log(error.response.status);
 
-    // if (error.response.status === 400) {
-    //   resetAndNavigate("/(auth)/signup");
-    // }
+    if (error.response.status === 400) {
+      resetAndNavigate("/(auth)/signup");
+    }
   }
 };
 
-//development=D9:05:04:F2:DE:2A:E8:CC:72:89:87:76:F7:D5:FC:91:D8:D2:41:7C
-//production= D9:05:04:F2:DE:2A:E8:CC:72:89:87:76:F7:D5:FC:91:D8:D2:41:7C
+export const signUpWithGoogle = async (data: any) => {
+  try {
+    await GoogleSignin.hasPlayServices();
+
+    await GoogleSignin.signOut();
+    const res = await GoogleSignin.signIn();
+
+    console.log(`${BASE_URL}/oauth/login`);
+    const apiRes = await axios.post(`${BASE_URL}/oauth/login`, {
+      id_token: res.data?.idToken,
+      ...data,
+    });
+    // console.log(apiRes);
+    const { tokens, user } = apiRes.data;
+
+    tokenStorage.set("accessToken", tokens?.access_token);
+    tokenStorage.set("refreshToken", tokens?.refresh_token);
+
+    const { setUser } = useAuthStore.getState();
+    setUser(user);
+    resetAndNavigate("/(home)/home");
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
+export const checkUsername = async (username: string) => {
+  try {
+    const apiRes = await axios.post(`${BASE_URL}/oauth/check-username`, {
+      username,
+    });
+    return apiRes.data?.available;
+  } catch (error) {
+    return false;
+  }
+};
